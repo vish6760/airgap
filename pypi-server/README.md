@@ -44,8 +44,7 @@ NOTE - Self signed certificate could be use for testing.
 Clone the repo and make the script executable:
 
 ```bash
-git clone https://github.com/<your-org>/<your-repo>.git
-cd <your-repo>
+cd airgap/pypi-server
 chmod +x setup-devpi.sh
 
 
