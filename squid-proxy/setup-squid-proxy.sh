@@ -30,6 +30,7 @@ if [[ $EUID -ne 0 ]]; then
     error_exit "This script must be run as root (or with sudo)."
 fi
 
+# Check required files
 if [[ ! -f "$SCRIPT_DIR/squid.conf" ]]; then
     error_exit "squid.conf not found in $SCRIPT_DIR"
 fi
@@ -42,6 +43,7 @@ echo "=== Installing Squid ==="
 sudo apt update -y || error_exit "apt update failed"
 sudo apt install -y squid || error_exit "Failed to install squid"
 
+# --- Backup existing configuration ---
 echo "=== Backing up existing squid.conf ==="
 if [ -f "$SQUID_CONF" ]; then
     BACKUP="${SQUID_CONF}.$(date +%F-%H%M%S).bak"
@@ -49,6 +51,7 @@ if [ -f "$SQUID_CONF" ]; then
     echo "Backup saved as $BACKUP"
 fi
 
+# --- Deploy configuration ---
 echo "=== Deploying squid.conf ==="
 sudo cp "$SCRIPT_DIR/squid.conf" "$SQUID_CONF" || error_exit "Failed to copy squid.conf"
 sudo chown root:root "$SQUID_CONF"
@@ -59,11 +62,17 @@ sudo cp "$SCRIPT_DIR/whitelist.txt" "$WHITELIST" || error_exit "Failed to copy w
 sudo chown root:root "$WHITELIST"
 sudo chmod 644 "$WHITELIST"
 
-echo "=== Initializing cache directories ==="
-sudo squid -z || error_exit "Cache initialization failed"
+# --- Stop Squid before initializing cache ---
+echo "=== Stopping Squid (if running) ==="
+sudo systemctl stop squid || true
 
-echo "=== Restarting and enabling Squid service ==="
-sudo systemctl restart squid || error_exit "Failed to restart Squid"
+# --- Initialize cache directories (ignore non-fatal warnings) ---
+echo "=== Initializing cache directories ==="
+sudo squid -z || echo "⚠️ Cache initialization completed with warnings, continuing..."
+
+# --- Start Squid service ---
+echo "=== Starting and enabling Squid service ==="
+sudo systemctl start squid || error_exit "Failed to start Squid"
 sudo systemctl enable squid || error_exit "Failed to enable Squid on boot"
 
 echo "✅ Squid setup completed successfully"
