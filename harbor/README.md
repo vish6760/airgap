@@ -1,6 +1,6 @@
 # Harbor Registry Installation Guide
 
-This guide explains how to install **Harbor (v2.11.0)** on Ubuntu using Docker and Docker Compose, with optional Nginx reverse proxy for HTTPS.
+This guide explains how to install **Harbor (v2.11.0)** on Ubuntu using Docker and Docker Compose, with an optional Nginx reverse proxy for HTTPS.
 
 ---
 
@@ -26,8 +26,8 @@ sudo systemctl status docker
 ## Step 2 — Download Harbor
 
 ```bash
-wget https://github.com/goharbor/harbor/releases/download/v2.11.0/harbor-online-installer-v2.11.0.tgz
-tar xvf harbor-online-installer-v2.11.0.tgz
+wget https://github.com/goharbor/harbor/releases/download/v2.14.0/harbor-online-installer-v2.14.0.tgz
+tar xvf harbor-online-installer-v2.14.0.tgz
 cd harbor
 ```
 
