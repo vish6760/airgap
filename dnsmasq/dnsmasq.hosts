@@ -1,0 +1,40 @@
+# GENESTACK (AIRGAP)
+10.240.0.20 genestack genestack.td2.com
+
+# GITLAB (AIRGAP)
+10.240.0.22 gitlab gitlab.td2.com
+10.240.0.22 nexus  nexus.td2.com
+
+# UBUNTU MAAS (PXE)
+172.29.232.61 maas maas.td2.com
+10.240.0.21 maas maas.td2.com
+
+# REPO SERVER (AIRGAP)
+10.240.0.23 repo-server repo-server.td2.com
+10.240.0.23 harbor harbor.td2.com
+10.240.0.23 pypi pypi.td2.com
+10.240.0.23 file-server file-server.td2.com
+
+10.240.1.100  nova
+10.240.1.100  novnc
+10.240.1.100  metadata
+10.240.1.100  cloudformation
+10.240.1.100  cloudwatch
+10.240.1.100  magnum
+10.240.1.100  barbican
+10.240.1.100  horizon
+10.240.1.100  gnocchi
+10.240.1.100  keystone
+10.240.1.100  glance
+10.240.1.100  octavia
+10.240.1.100  neutron
+10.240.1.100  heat
+10.240.1.100  placement
+10.240.1.100  cinder
+10.240.1.100  skyline
+10.240.1.100  ironic
+10.240.0.181  infra01
+10.240.0.183  infra02
+10.240.0.184  infra03
+10.240.0.176  compute01
+10.240.0.178  compute02
