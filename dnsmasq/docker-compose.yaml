@@ -1,0 +1,13 @@
+services:
+  dnsmasq:
+    image: dockurr/dnsmasq
+    container_name: dnsmasq
+    ports:
+      - 10.240.0.186:53:53/udp
+      - 10.240.0.186:53:53/tcp
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /opt/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf
+      - /opt/dnsmasq/dnsmasq.hosts:/etc/dnsmasq.hosts
+    restart: always
